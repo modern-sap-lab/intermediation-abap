@@ -1,0 +1,5 @@
+CLASS zbp_i_msl_principal DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_msl_principal.
+ENDCLASS.
+
+CLASS zbp_i_msl_principal IMPLEMENTATION.
+ENDCLASS.

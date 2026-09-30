@@ -1,0 +1,4 @@
+@EndUserText.label: 'Intermediation administration service'
+define service ZUI_MSL_INTERMEDIATION {
+  expose ZC_MSL_PRINCIPAL as Principals;
+}

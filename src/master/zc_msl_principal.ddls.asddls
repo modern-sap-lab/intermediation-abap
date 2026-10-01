@@ -8,10 +8,15 @@ define root view entity ZC_MSL_PRINCIPAL
   as projection on ZI_MSL_PRINCIPAL
 {
   key PrincipalUUID,
+      @EndUserText.label: 'Partner Code'
       ExternalCode,
+      @EndUserText.label: 'Name'
       Name,
+      @EndUserText.label: 'Commission %'
       DefaultCommissionPct,
+      @EndUserText.label: 'Status'
       Status,
+      @EndUserText.label: 'SAP Business Partner'
       SapBusinessPartner,
       CreatedBy,
       CreatedAt,

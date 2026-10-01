@@ -1,0 +1,97 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+  typeName: 'Principal',
+  typeNamePlural: 'Principals',
+  title: {
+    type: #STANDARD,
+    value: 'Name'
+  },
+  description: {
+    type: #STANDARD,
+    value: 'ExternalCode'
+  }
+}
+
+annotate view ZC_MSL_PRINCIPAL with
+{
+  @UI.facet: [
+    {
+      id: 'PrincipalDetails',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'General Information',
+      position: 10
+    }
+  ]
+
+  @UI.hidden: true
+  PrincipalUUID;
+
+  @UI.lineItem: [
+    { position: 10 },
+    {
+      type: #FOR_ACTION,
+      dataAction: 'Approve',
+      label: 'Approve'
+    },
+    {
+      type: #FOR_ACTION,
+      dataAction: 'Reject',
+      label: 'Reject'
+    },
+    {
+      type: #FOR_ACTION,
+      dataAction: 'Suspend',
+      label: 'Suspend'
+    },
+    {
+      type: #FOR_ACTION,
+      dataAction: 'Deactivate',
+      label: 'Deactivate'
+    },
+    {
+      type: #FOR_ACTION,
+      dataAction: 'Reactivate',
+      label: 'Reactivate'
+    },
+    {
+      type: #FOR_ACTION,
+      dataAction: 'SubmitForReview',
+      label: 'SubmitForReview'
+    }
+  ]
+  @UI.identification: [ { position: 10 } ]
+  ExternalCode;
+
+  @UI.lineItem: [ { position: 20 } ]
+  @UI.identification: [ { position: 20 } ]
+  Name;
+
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.identification: [ { position: 30 } ]
+  DefaultCommissionPct;
+
+  @UI.lineItem: [ { position: 40 } ]
+  @UI.identification: [ { position: 40 } ]
+  Status;
+
+  @UI.lineItem: [ { position: 50 } ]
+  @UI.identification: [ { position: 50 } ]
+  SapBusinessPartner;
+
+  @UI.hidden: true
+  CreatedBy;
+
+  @UI.hidden: true
+  CreatedAt;
+
+  @UI.hidden: true
+  LocalLastChangedBy;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+  @UI.hidden: true
+  LastChangedAt;
+}

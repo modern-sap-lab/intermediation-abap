@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD01V>
+    <DOMNAME>ZMSL_PRINCIPAL_STATUS_D</DOMNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000012</LENG>
+    <OUTPUTLEN>000012</OUTPUTLEN>
+    <VALEXI>X</VALEXI>
+    <DDTEXT>Principal lifecycle status</DDTEXT>
+    <DOMMASTER>E</DOMMASTER>
+   </DD01V>
+   <DD07V_TAB>
+    <DD07V>
+     <DOMNAME>ZMSL_PRINCIPAL_STATUS_D</DOMNAME>
+     <VALPOS>0001</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>UNDER_REVI</DOMVALUE_L>
+     <DDTEXT>Under review</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMSL_PRINCIPAL_STATUS_D</DOMNAME>
+     <VALPOS>0002</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>ACTIVE</DOMVALUE_L>
+     <DDTEXT>Active</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMSL_PRINCIPAL_STATUS_D</DOMNAME>
+     <VALPOS>0003</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>INACTIVE</DOMVALUE_L>
+     <DDTEXT>Inactive</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMSL_PRINCIPAL_STATUS_D</DOMNAME>
+     <VALPOS>0004</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>SUSPENDED</DOMVALUE_L>
+     <DDTEXT>Suspended</DDTEXT>
+    </DD07V>
+   </DD07V_TAB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

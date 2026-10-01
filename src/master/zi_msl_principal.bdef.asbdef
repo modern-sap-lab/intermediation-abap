@@ -11,28 +11,38 @@ etag master LocalLastChangedAt
   update;
   delete;
 
+  determination SetInitialStatus on modify { create; }
+
+  action Approve result [1] $self;
+  action Reject result [1] $self;
+  action Suspend result [1] $self;
+  action Deactivate result [1] $self;
+  action Reactivate result [1] $self;
+  action SubmitForReview result [1] $self;
+
   field ( numbering : managed, readonly )
-    PrincipalUUID;
+  PrincipalUUID;
 
   field ( readonly )
-    CreatedBy,
-    CreatedAt,
-    LocalLastChangedBy,
-    LocalLastChangedAt,
-    LastChangedAt;
+  Status,
+  CreatedBy,
+  CreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
 
   mapping for zmsl_principal
-  {
-    PrincipalUUID           = principal_uuid;
-    ExternalCode            = external_code;
-    Name                    = name;
-    DefaultCommissionPct    = default_commission_pct;
-    Status                  = status;
-    SapBusinessPartner      = sap_business_partner;
-    CreatedBy               = created_by;
-    CreatedAt               = created_at;
-    LocalLastChangedBy      = local_last_changed_by;
-    LocalLastChangedAt      = local_last_changed_at;
-    LastChangedAt           = last_changed_at;
-  }
+    {
+      PrincipalUUID        = principal_uuid;
+      ExternalCode         = external_code;
+      Name                 = name;
+      DefaultCommissionPct = default_commission_pct;
+      Status               = status;
+      SapBusinessPartner   = sap_business_partner;
+      CreatedBy            = created_by;
+      CreatedAt            = created_at;
+      LocalLastChangedBy   = local_last_changed_by;
+      LocalLastChangedAt   = local_last_changed_at;
+      LastChangedAt        = last_changed_at;
+    }
 }

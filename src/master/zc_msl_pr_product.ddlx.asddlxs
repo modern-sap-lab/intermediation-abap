@@ -1,0 +1,57 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+  typeName: 'Principal Product',
+  typeNamePlural: 'Principal Products',
+  title: {
+    type: #STANDARD,
+    value: 'Name'
+  },
+  description: {
+    type: #STANDARD,
+    value: 'ExternalCode'
+  }
+}
+
+annotate view ZC_MSL_PR_PRODUCT with
+{
+  @UI.facet: [
+    {
+      id: 'ProductDetails',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'General Information',
+      position: 10
+    }
+  ]
+
+  @UI.hidden: true
+  ProductUUID;
+
+  @UI.lineItem: [ { position: 10 } ]
+  @UI.identification: [ { position: 10 } ]
+  ExternalCode;
+
+  @UI.lineItem: [ { position: 20 } ]
+  @UI.identification: [ { position: 20 } ]
+  Name;
+
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.identification: [ { position: 30 } ]
+  PrincipalUUID;
+
+  @UI.hidden: true
+  CreatedBy;
+
+  @UI.hidden: true
+  CreatedAt;
+
+  @UI.hidden: true
+  LocalLastChangedBy;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+  @UI.hidden: true
+  LastChangedAt;
+}

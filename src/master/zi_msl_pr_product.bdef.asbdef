@@ -1,0 +1,49 @@
+managed implementation in class zbp_i_msl_pr_product unique;
+strict ( 2 );
+
+define behavior for ZI_MSL_PR_PRODUCT alias PrincipalProduct
+persistent table zmsl_pr_product
+lock master
+authorization master ( none )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  validation ValidatePrincipal on save
+  { create; field PrincipalUUID; }
+
+  validation ValidateUniqueCode on save
+  { create; field ExternalCode; }
+
+  field ( numbering : managed, readonly )
+  ProductUUID;
+
+  field ( mandatory : create, readonly : update )
+  PrincipalUUID;
+
+  field ( mandatory : create )
+  ExternalCode,
+  Name;
+
+  field ( readonly )
+  CreatedBy,
+  CreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+  mapping for zmsl_pr_product
+    {
+      ProductUUID        = product_uuid;
+      PrincipalUUID      = principal_uuid;
+      ExternalCode       = external_code;
+      Name               = name;
+      CreatedBy          = created_by;
+      CreatedAt          = created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}

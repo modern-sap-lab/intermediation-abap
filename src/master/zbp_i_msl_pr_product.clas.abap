@@ -1,0 +1,5 @@
+CLASS zbp_i_msl_pr_product DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_msl_pr_product.
+ENDCLASS.
+
+CLASS zbp_i_msl_pr_product IMPLEMENTATION.
+ENDCLASS.

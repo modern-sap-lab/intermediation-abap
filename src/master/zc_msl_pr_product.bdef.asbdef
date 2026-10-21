@@ -1,6 +1,8 @@
 projection;
 strict ( 2 );
 
+use side effects;
+
 define behavior for ZC_MSL_PR_PRODUCT alias PrincipalProduct
 {
   use create;

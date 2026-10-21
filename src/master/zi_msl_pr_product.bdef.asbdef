@@ -17,6 +17,17 @@ etag master LocalLastChangedAt
   validation ValidateUniqueCode on save
   { create; field ExternalCode; }
 
+  validation ValidateCodeFormat on save
+  { create; field ExternalCode; }
+
+  determination NormalizeExternalCode on modify
+  { create; field ExternalCode; }
+
+  side effects
+  {
+    field ExternalCode affects $self;
+  }
+
   field ( numbering : managed, readonly )
   ProductUUID;
 

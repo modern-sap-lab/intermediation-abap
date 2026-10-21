@@ -6,8 +6,11 @@ CLASS lhc_principalproduct DEFINITION INHERITING FROM cl_abap_behavior_handler.
        keys FOR PrincipalProduct~ValidatePrincipal.
     METHODS ValidateUniqueCode FOR VALIDATE ON SAVE
        keys FOR PrincipalProduct~ValidateUniqueCode.
-
-ENDCLASS.
+    METHODS ValidateCodeFormat FOR VALIDATE ON SAVE
+       keys FOR PrincipalProduct~ValidateCodeFormat.
+    METHODS NormalizeExternalCode FOR DETERMINE ON MODIFY
+      keys FOR PrincipalProduct~NormalizeExternalCode.
+  ENDCLASS.
 
 CLASS lhc_principalproduct IMPLEMENTATION.
 
@@ -115,6 +118,70 @@ CLASS lhc_principalproduct IMPLEMENTATION.
 
   ENDMETHOD.
 
+METHOD ValidateCodeFormat.
+
+  READ ENTITIES OF zi_msl_pr_product IN LOCAL MODE
+    ENTITY PrincipalProduct
+      FIELDS ( ExternalCode )
+      WITH CORRESPONDING #( keys )
+    RESULT DATA(products).
+
+  LOOP AT products INTO DATA(product).
+
+    IF product-ExternalCode IS INITIAL
+       OR NOT matches(
+         val   = product-ExternalCode
+         regex = '^[A-Z0-9.-]+$'
+       ).
+
+      APPEND VALUE #(
+        %tky = product-%tky
+      ) TO failed-principalproduct.
+
+      APPEND VALUE #(
+        %tky = product-%tky
+        %msg = new_message_with_text(
+          severity = if_abap_behv_message=>severity-error
+          text     = 'Product code may contain only A-Z, 0-9, hyphen and dot'
+        )
+        %element-ExternalCode = if_abap_behv=>mk-on
+      ) TO reported-principalproduct.
+
+    ENDIF.
+
+  ENDLOOP.
+
+ENDMETHOD.
+
+METHOD NormalizeExternalCode.
+
+  READ ENTITIES OF zi_msl_pr_product IN LOCAL MODE
+    ENTITY PrincipalProduct
+      FIELDS ( ExternalCode )
+      WITH CORRESPONDING #( keys )
+    RESULT DATA(products).
+
+  DATA updates TYPE TABLE FOR UPDATE zi_msl_pr_product.
+
+  LOOP AT products INTO DATA(product).
+
+    DATA(normalized_code) = to_upper( product-ExternalCode ).
+
+    IF normalized_code <> product-ExternalCode.
+      APPEND VALUE #(
+        %tky         = product-%tky
+        ExternalCode = normalized_code
+      ) TO updates.
+    ENDIF.
+
+  ENDLOOP.
+
+  IF updates IS NOT INITIAL.
+    MODIFY ENTITIES OF zi_msl_pr_product IN LOCAL MODE
+      ENTITY PrincipalProduct
+        UPDATE FIELDS ( ExternalCode )
+        WITH updates.
+  ENDIF.
+
+ENDMETHOD.
 ENDCLASS.
-
-

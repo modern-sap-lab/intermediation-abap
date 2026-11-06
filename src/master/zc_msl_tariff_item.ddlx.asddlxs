@@ -1,0 +1,42 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+  typeName: 'Tariff Item',
+  typeNamePlural: 'Tariff Items'
+}
+
+annotate view ZC_MSL_TARIFF_ITEM with
+{
+  @UI.hidden: true
+  TariffItemUUID;
+
+  @UI.hidden: true
+  TariffUUID;
+
+  @UI.lineItem: [ { position: 10 } ]
+  @UI.identification: [ { position: 10 } ]
+  ProductUUID;
+
+  @UI.lineItem: [ { position: 20 } ]
+  @UI.identification: [ { position: 20 } ]
+  UnitPrice;
+
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.identification: [ { position: 30 } ]
+  CommissionPct;
+
+  @UI.hidden: true
+  CreatedBy;
+
+  @UI.hidden: true
+  CreatedAt;
+
+  @UI.hidden: true
+  LocalLastChangedBy;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+  @UI.hidden: true
+  LastChangedAt;
+}

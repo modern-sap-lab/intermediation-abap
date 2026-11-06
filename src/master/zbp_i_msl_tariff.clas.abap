@@ -1,0 +1,11 @@
+CLASS zbp_i_msl_tariff DEFINITION
+  PUBLIC
+  ABSTRACT
+  FINAL
+  FOR BEHAVIOR OF zi_msl_tariff.
+
+ENDCLASS.
+
+CLASS zbp_i_msl_tariff IMPLEMENTATION.
+
+ENDCLASS.

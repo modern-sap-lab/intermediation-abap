@@ -1,0 +1,78 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+  typeName: 'Tariff',
+  typeNamePlural: 'Tariffs',
+  title: {
+    type: #STANDARD,
+    value: 'Name'
+  },
+  description: {
+    type: #STANDARD,
+    value: 'ExternalCode'
+  }
+}
+
+annotate view ZC_MSL_TARIFF with
+{
+@UI.facet: [
+  {
+    id: 'TariffDetails',
+    purpose: #STANDARD,
+    type: #IDENTIFICATION_REFERENCE,
+    label: 'General Information',
+    position: 10
+  },
+  {
+    id: 'TariffItems',
+    purpose: #STANDARD,
+    type: #LINEITEM_REFERENCE,
+    label: 'Tariff Items',
+    position: 20,
+    targetElement: '_Items'
+  }
+]
+
+  @UI.hidden: true
+  TariffUUID;
+
+  @UI.lineItem: [ { position: 10 } ]
+  @UI.identification: [ { position: 10, label: 'Tariff Code' } ]
+  @UI.selectionField: [ { position: 10 } ]
+  ExternalCode;
+
+  @UI.lineItem: [ { position: 20 } ]
+  @UI.identification: [ { position: 20, label: 'Name' } ]
+  Name;
+
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.identification: [ { position: 30, label: 'Principal' } ]
+  PrincipalUUID;
+
+  @UI.lineItem: [ { position: 40 } ]
+  @UI.identification: [ { position: 40, label: 'Valid from' } ]
+  ValidFrom;
+
+  @UI.lineItem: [ { position: 50 } ]
+  @UI.identification: [ { position: 50, label: 'Valid to' } ]
+  ValidTo;
+
+  @UI.lineItem: [ { position: 60 } ]
+  @UI.identification: [ { position: 60, label: 'Currency' } ]
+  CurrencyCode;
+
+  @UI.hidden: true
+  CreatedBy;
+
+  @UI.hidden: true
+  CreatedAt;
+
+  @UI.hidden: true
+  LocalLastChangedBy;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+  @UI.hidden: true
+  LastChangedAt;
+}

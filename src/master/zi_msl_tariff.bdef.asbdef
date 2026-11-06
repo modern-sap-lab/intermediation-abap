@@ -1,0 +1,133 @@
+managed implementation in class zbp_i_msl_tariff unique;
+strict ( 2 );
+
+define behavior for ZI_MSL_TARIFF alias Tariff
+persistent table zmsl_tariff
+lock master
+authorization master ( none )
+etag master LocalLastChangedAt
+{
+  create
+  {
+    default function GetDefaultsForCreate;
+  }
+  update;
+  delete;
+
+  determination NormalizeExternalCode on modify
+  {
+    create;
+    field ExternalCode;
+  }
+
+  side effects
+  {
+    field ExternalCode affects $self;
+  }
+
+  validation ValidateDates on save
+  {
+    create;
+    field ValidFrom, ValidTo;
+  }
+
+  validation ValidateNoOverlap on save
+  {
+    create;
+    field ValidFrom, ValidTo;
+  }
+
+  validation ValidateCodeFormat on save
+  {
+    create;
+    field ExternalCode;
+  }
+
+
+  validation ValidateUniqueCode on save
+  {
+    create;
+    field ExternalCode;
+  }
+
+  association _Items { create; }
+
+  field ( numbering : managed, readonly )
+  TariffUUID;
+
+  field ( mandatory : create, readonly : update )
+  PrincipalUUID;
+
+  field ( mandatory : create )
+  ExternalCode,
+  Name,
+  ValidFrom,
+  ValidTo,
+  CurrencyCode;
+
+  field ( readonly )
+  CreatedBy,
+  CreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+  mapping for zmsl_tariff
+    {
+      TariffUUID         = tariff_uuid;
+      PrincipalUUID      = principal_uuid;
+      ExternalCode       = external_code;
+      Name               = name;
+      ValidFrom          = valid_from;
+      ValidTo            = valid_to;
+      CurrencyCode       = currency_code;
+      CreatedBy          = created_by;
+      CreatedAt          = created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}
+
+define behavior for ZI_MSL_TARIFF_ITEM alias TariffItem
+persistent table zmsl_tariff_item
+lock dependent by _Tariff
+authorization dependent by _Tariff
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  association _Tariff;
+
+  field ( numbering : managed, readonly )
+  TariffItemUUID;
+
+  field ( readonly )
+  TariffUUID;
+
+  field ( mandatory : create )
+  ProductUUID,
+  UnitPrice;
+
+  field ( readonly )
+  CreatedBy,
+  CreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+  mapping for zmsl_tariff_item
+    {
+      TariffItemUUID     = tariff_item_uuid;
+      TariffUUID         = tariff_uuid;
+      ProductUUID        = product_uuid;
+      UnitPrice          = unit_price;
+      CommissionPct      = commission_pct;
+      CreatedBy          = created_by;
+      CreatedAt          = created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}
